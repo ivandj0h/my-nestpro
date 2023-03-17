@@ -42,6 +42,7 @@ $ npm run test:cov
 
 ## Screenshots
 ![Get All Users](/assets/get_all_users.png)
+![Get All User's Posts](/assets/get_all_users_posts.png)
 
 ## License
 
