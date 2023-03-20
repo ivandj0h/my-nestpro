@@ -11,24 +11,16 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateUserDto } from '../../dtos/CreateUser.dto';
+import { UsersService } from '../../services/users/users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private usersService: UsersService) {}
+
   // Get All Users
   @Get()
   getAllUsers() {
-    return [
-      {
-        id: 1,
-        username: 'admin',
-        email: 'admin@admin.com',
-      },
-      {
-        id: 2,
-        username: 'user',
-        email: 'user@user.com',
-      },
-    ];
+    return this.usersService.fetchAllUsers();
   }
 
   // Get All User's Posts
