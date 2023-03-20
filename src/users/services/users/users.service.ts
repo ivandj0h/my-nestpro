@@ -31,4 +31,9 @@ export class UsersService {
 
     return newUser;
   }
+
+  // Get a single User
+  fetchSingleUser(userId: number) {
+    return this.fakeUsers.find((user) => user.id === userId);
+  }
 }

@@ -54,7 +54,7 @@ export class UsersController {
   createNewUser(@Body() userData: CreateUserDto) {
     console.log(userData);
 
-    return {};
+    return this.usersService.createNewUser(userData);
   }
 
   // Get a single User (get param)
@@ -62,9 +62,7 @@ export class UsersController {
   getSingleUser(@Param('id', ParseIntPipe) id: number) {
     console.log(id);
 
-    return {
-      id,
-    };
+    return this.usersService.fetchSingleUser(id);
   }
 
   @Delete('delete/:id')
