@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { CreateUserDto } from '../../dtos/CreateUser.dto';
 
 @Controller('users')
 export class UsersController {
@@ -40,6 +41,40 @@ export class UsersController {
         userId: 2,
         title: 'Post 3',
         body: 'Post 3 Body',
+      },
+    ];
+  }
+
+  // Post a new User
+  @Post('create')
+  createNewUser(@Body() userData: CreateUserDto) {
+    console.log(userData);
+
+    return {};
+  }
+
+  // Get a single User (get param)
+  @Get(':id')
+  getSingleUser(@Param('id') id: string) {
+    console.log(id);
+
+    return {
+      id,
+    };
+  }
+
+  // Get a single User (get query param)
+  @Get()
+  getSingleQueryUser(@Query('id') id: string) {
+    console.log(id);
+    return [
+      {
+        id: 1,
+        username: 'admin',
+      },
+      {
+        id: 2,
+        username: 'user',
       },
     ];
   }
