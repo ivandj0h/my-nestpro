@@ -11,24 +11,16 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateUserDto } from '../../dtos/CreateUser.dto';
+import { UsersService } from '../../services/users/users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private usersService: UsersService) {}
+
   // Get All Users
   @Get()
   getAllUsers() {
-    return [
-      {
-        id: 1,
-        username: 'admin',
-        email: 'admin@admin.com',
-      },
-      {
-        id: 2,
-        username: 'user',
-        email: 'user@user.com',
-      },
-    ];
+    return this.usersService.fetchAllUsers();
   }
 
   // Get All User's Posts
@@ -62,7 +54,7 @@ export class UsersController {
   createNewUser(@Body() userData: CreateUserDto) {
     console.log(userData);
 
-    return {};
+    return this.usersService.createNewUser(userData);
   }
 
   // Get a single User (get param)
@@ -70,9 +62,7 @@ export class UsersController {
   getSingleUser(@Param('id', ParseIntPipe) id: number) {
     console.log(id);
 
-    return {
-      id,
-    };
+    return this.usersService.fetchSingleUser(id);
   }
 
   @Delete('delete/:id')
