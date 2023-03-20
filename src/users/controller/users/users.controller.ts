@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CreateUserDto } from '../../dtos/CreateUser.dto';
 
 @Controller('users')
@@ -47,6 +58,7 @@ export class UsersController {
 
   // Post a new User
   @Post('create')
+  @UsePipes(new ValidationPipe({ transform: true }))
   createNewUser(@Body() userData: CreateUserDto) {
     console.log(userData);
 
@@ -55,7 +67,7 @@ export class UsersController {
 
   // Get a single User (get param)
   @Get(':id')
-  getSingleUser(@Param('id') id: string) {
+  getSingleUser(@Param('id', ParseIntPipe) id: number) {
     console.log(id);
 
     return {
@@ -63,19 +75,13 @@ export class UsersController {
     };
   }
 
-  // Get a single User (get query param)
-  @Get()
-  getSingleQueryUser(@Query('id') id: string) {
-    console.log(id);
-    return [
-      {
-        id: 1,
-        username: 'admin',
-      },
-      {
-        id: 2,
-        username: 'user',
-      },
-    ];
+  @Delete('delete/:id')
+  deleteUser(@Param('id', ParseIntPipe) id: number) {
+    return {
+      message: `User ${id} deleted`,
+    };
   }
+}
+function createNewUser(): any {
+  throw new Error('Function not implemented.');
 }
