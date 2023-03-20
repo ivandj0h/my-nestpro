@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -23,31 +25,6 @@ export class UsersController {
     return this.usersService.fetchAllUsers();
   }
 
-  // Get All User's Posts
-  @Get('posts')
-  getAllUsersPosts() {
-    return [
-      {
-        id: 1,
-        userId: 1,
-        title: 'Post 1',
-        body: 'Post 1 Body',
-      },
-      {
-        id: 2,
-        userId: 1,
-        title: 'Post 2',
-        body: 'Post 2 Body',
-      },
-      {
-        id: 3,
-        userId: 2,
-        title: 'Post 3',
-        body: 'Post 3 Body',
-      },
-    ];
-  }
-
   // Post a new User
   @Post('create')
   @UsePipes(new ValidationPipe({ transform: true }))
@@ -61,17 +38,15 @@ export class UsersController {
   @Get(':id')
   getSingleUser(@Param('id', ParseIntPipe) id: number) {
     console.log(id);
-
-    return this.usersService.fetchSingleUser(id);
+    const user = this.usersService.fetchSingleUser(id);
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    return user;
   }
 
   @Delete('delete/:id')
   deleteUser(@Param('id', ParseIntPipe) id: number) {
-    return {
-      message: `User ${id} deleted`,
-    };
+    return this.usersService.deleteUser(id);
   }
-}
-function createNewUser(): any {
-  throw new Error('Function not implemented.');
 }

@@ -36,4 +36,13 @@ export class UsersService {
   fetchSingleUser(userId: number) {
     return this.fakeUsers.find((user) => user.id === userId);
   }
+
+  // Delete a single User
+  deleteUser(userId: number) {
+    const userIndex = this.fakeUsers.findIndex((user) => user.id === userId);
+    if (userIndex !== -1) {
+      this.fakeUsers.splice(userIndex, 1);
+    }
+    return this.fakeUsers;
+  }
 }
