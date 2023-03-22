@@ -20,7 +20,9 @@ or you can `clone` the project and run `npm install` in the project directory.
 $ git clone https://github.com/ivandi1980/my-nestpro.git
 ```
 
-## Running the app
+## Running the app  
+
+- Without Docker
 
 ```bash
 # development
@@ -32,6 +34,26 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+- With Docker
+
+```bash
+# build docker image
+$ docker build -t my-nestpro .
+
+# run docker image
+$ docker run -p 9999:9999 my-nestpro
+```
+
+## Swagger
+
+Swagger is a tool that helps you design, build, document, and consume RESTful web services.
+
+- Swagger UI  
+  `http://localhost:9999/api`
+- Swagger JSON  
+  `http://localhost:9999/api-json`
+
 
 ## Test
 
