@@ -70,10 +70,10 @@ $ npm run test:cov
 
 ## Screenshots
 
-- Get All Users via Rest Client
+- Get All Users via Rest Client  
   ![Get All Users](/assets/get_all_users.png)
 
-- Get All User's Posts via Swagger
+- Get All User's Posts via Swagger  
   ![Get All Users](/assets/swagger.png)
 
 ## License
