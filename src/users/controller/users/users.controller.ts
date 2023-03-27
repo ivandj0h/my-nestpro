@@ -14,8 +14,9 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from '../../dtos/CreateUser.dto';
 import { UsersService } from '../../services/users/users.service';
+import { ValidateCreateUserPipe } from '../../pipes/validate-create-user/validate-create-user.pipe';
 
-@Controller('users')
+@Controller('/api/users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
@@ -28,7 +29,8 @@ export class UsersController {
   // Post a new User
   @Post('create')
   @UsePipes(new ValidationPipe({ transform: true }))
-  createNewUser(@Body() userData: CreateUserDto) {
+  createNewUser(@Body(ValidateCreateUserPipe) userData: CreateUserDto) {
+    console.log('Inside createNewUser() in users.controller.ts');
     console.log(userData);
 
     return this.usersService.createNewUser(userData);

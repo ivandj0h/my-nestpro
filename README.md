@@ -1,6 +1,6 @@
 # My NestPro
 
-<h2>`On Progress of Development`</h2>
+`This Project is still in development`
 
 ## Description
 
