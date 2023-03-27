@@ -5,10 +5,11 @@ import {
   Injectable,
   PipeTransform,
 } from '@nestjs/common';
+import { CreateUserDto } from '../../dtos/CreateUser.dto';
 
 @Injectable()
 export class ValidateCreateUserPipe implements PipeTransform {
-  transform(value: any, metadata: ArgumentMetadata) {
+  transform(value: CreateUserDto, metadata: ArgumentMetadata) {
     console.log(value);
     console.log(metadata);
 
@@ -18,12 +19,10 @@ export class ValidateCreateUserPipe implements PipeTransform {
         'Invalid DataType for Property Age, Expected Number',
         HttpStatus.BAD_REQUEST,
       );
-    } else {
-      return {
-        ...value,
-        age: parseAgeToNumber,
-      };
     }
-    return value;
+    return {
+      ...value,
+      age: parseAgeToNumber,
+    };
   }
 }
