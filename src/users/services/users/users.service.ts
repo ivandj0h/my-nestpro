@@ -7,11 +7,13 @@ export class UsersService {
       id: 1,
       username: 'admin',
       email: 'admin@admin.com',
+      age: 43,
     },
     {
       id: 2,
       username: 'user',
       email: 'user@user.com',
+      age: 23,
     },
   ];
 
